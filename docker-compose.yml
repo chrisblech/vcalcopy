@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  app:
+    image: bleala/vdirsyncer:${VERSION:-latest}
+    container_name: vdirsyncer
+    restart: unless-stopped
+    entrypoint: /vdirsyncer/start.sh
+    environment:
+      - TZ=Europe/Berlin
+      - AUTOSYNC=true # set to true for automatic sync, default to false
+      - AUTOUPDATE=true
+      #- NOTIFY_URL=https://hc-ping.com/<uuid>  # monitor sync via healthchecks.io
+      - CRON_TIME=#*/8 * * * * # we inject a own line into the cronfile, disable auto-generated one. (healthchecks.io)
+    volumes:
+      - vdirsyncer:/vdirsyncer
+
+volumes:
+  vdirsyncer:

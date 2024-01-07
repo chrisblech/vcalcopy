@@ -1,0 +1,1 @@
+*/8 * * * * /usr/local/bin/vdirsyncer -c /vdirsyncer/config metasync 2>/vdirsyncer/lastsync.log && /usr/local/bin/vdirsyncer -c /vdirsyncer/config sync 2>>/vdirsyncer/lastsync.log && /vdirsyncer/notify.sh || /vdirsyncer/notify.sh 1

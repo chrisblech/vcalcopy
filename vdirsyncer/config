@@ -1,0 +1,62 @@
+### General ###
+[general]
+status_path = "/vdirsyncer/status/"
+
+[pair pair_google_me]
+a = "google_me"
+b = "local_me"
+collections = null
+#partial_sync = "ignore"
+conflict_resolution = "a wins"
+
+[storage google_me]
+type = "http"
+url = "https://calendar.google.com/calendar/ical/XXXXXX%40group.calendar.google.com/private-YYYYYYY/basic.ics"
+
+[storage local_me]
+type = "filesystem"
+path = "/vdirsyncer/calendars/google_me/"
+fileext = ".ics"
+post_hook = "/vdirsyncer/posthook_1h.sh"   # extends every event: one hour earlier/after
+post_hook_delete = "/vdirsyncer/pre_deletion_hook.sh"
+
+[pair pair_google_family]
+a = "google_family"
+b = "local_family"
+collections = null
+#partial_sync = "ignore"
+conflict_resolution = "a wins"
+
+[storage google_family]
+type = "http"
+url = "https://calendar.google.com/calendar/ical/XXXXXX%40group.calendar.google.com/private-YYYYYYY/basic.ics"
+
+[storage local_family]
+type = "filesystem"
+path = "/vdirsyncer/calendars/google_family/"
+fileext = ".ics"
+post_hook = "/vdirsyncer/posthook.sh"
+post_hook_delete = "/vdirsyncer/pre_deletion_hook.sh"
+
+######################
+### mailbox.org
+[pair upsync]
+a = "local_upsync"
+b = "mailbox"
+collections = null
+#partial_sync = "ignore"
+conflict_resolution = "a wins"
+
+[storage local_upsync]
+type = "filesystem"
+path = "/vdirsyncer/calendars/upsync/"
+fileext = ".ics"
+#read_only = true
+
+[storage mailbox]
+type = "caldav"
+url = "https://dav.mailbox.org/caldav/ZZZZZZZZ"
+# in mailbox.org settings, you can generate Application-Credentials for WebCal-Clients
+username = "user@example.org@1234567"
+password = "xxyy-zzzz-abcd-efgh"
+item_types = ["VEVENT"]
